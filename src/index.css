@@ -3,6 +3,18 @@
 @theme{
     --color-card: #EBF4DD;
     --color-background: #90AB8B;
+    --color-header-text: #1B211A;
+    --color-head-number: #254F22;
+    --color-first-button: #A7E399;
+    --color-second-button: #06923E;
+    --color-third-button: #A7E399;
+    --color-gridient-start: #328E6E;
+    --color-gridient-end: #C1E59F;
+    --color-primary-text: #1a2816;
+    --color-gridient-tag-start: #90AB8B;
+    --color-gridient-tag-end: #C0B87A;
+    --color-small-tag: #656763;
+    --color-secondry-background: #D2DCB6;
 }
 
 .vazirmatn {
