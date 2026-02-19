@@ -1,20 +1,20 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
-@theme{
-    --color-card: #EBF4DD;
-    --color-background: #90AB8B;
-    --color-header-text: #1B211A;
-    --color-head-number: #254F22;
-    --color-first-button: #A7E399;
-    --color-second-button: #06923E;
-    --color-third-button: #A7E399;
-    --color-gridient-start: #328E6E;
-    --color-gridient-end: #C1E59F;
-    --color-primary-text: #1a2816;
-    --color-gridient-tag-start: #90AB8B;
-    --color-gridient-tag-end: #C0B87A;
-    --color-small-tag: #656763;
-    --color-secondry-background: #D2DCB6;
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap");
+@theme {
+  --color-card: #ebf4dd;
+  --color-background: #90ab8b;
+  --color-header-text: #1b211a;
+  --color-head-number: #254f22;
+  --color-first-button: #a7e399;
+  --color-second-button: #06923e;
+  --color-third-button: #a7e399;
+  --color-gridient-start: #328e6e;
+  --color-gridient-end: #c1e59f;
+  --color-primary-text: #1a2816;
+  --color-gridient-tag-start: #90ab8b;
+  --color-gridient-tag-end: #c0b87a;
+  --color-small-tag: #656763;
+  --color-secondry-background: #d2dcb6;
 }
 
 .vazirmatn {
