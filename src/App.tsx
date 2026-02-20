@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PlusIcon,
   MinusIcon,
   ArrowPathIcon,
   PlayIcon,
   CursorArrowRippleIcon,
+  StopIcon,
 } from "@heroicons/react/24/outline";
 
 const App: React.FC = () => {
   const [counter, setcounter] = useState<number>(5);
+  const [isAuto, setIsAuto] = useState<boolean>(false);
+
 
   function increment(): void {
     setcounter((prev) => Math.min(20, prev + 1));
@@ -21,6 +24,24 @@ const App: React.FC = () => {
   function reset(): void {
     setcounter(5);
   }
+
+  function randomNumber(): void{
+    setcounter(Math.floor(Math.random() * 21));
+  }
+
+  function toggleAuto(){
+    setIsAuto(!isAuto);
+  }
+
+  useEffect(() => {
+    if (!isAuto) return;
+
+    const timer = setInterval(() => {
+      setcounter(prev => Math.min(20, prev + 1))
+    }, 1000)
+
+    return() => clearInterval(timer)
+  }, [isAuto])
 
   return (
     <>
@@ -51,18 +72,18 @@ const App: React.FC = () => {
                 onClick={increment}
                 className="bg-third-button rounded-full p-5 "
               >
-                <PlusIcon className=" w-10 h-10 "></PlusIcon>
+                <PlusIcon className=" w-10 h-10 "/>
               </button>
             </div>
 
             <div className="flex justify-between items-center mt-16">
-              <button className="bg-gradient-to-tr from-gridient-start to-gridient-end rounded-md p-5 flex justify-center items-center">
-                <PlayIcon className="w-6 h-6 mr-1"></PlayIcon>
-                <span className="vazirmatn text-xl">شروع خودکار</span>
+              <button onClick={toggleAuto} className="bg-gradient-to-tr from-gridient-start to-gridient-end rounded-md p-5 flex justify-center items-center">
+                {!isAuto? <PlayIcon className="w-6 h-6 mr-1"/> : <StopIcon className="w-6 h-6 mr-1"/>}
+                <span className="vazirmatn text-xl">{isAuto? "توقف" :"شروع خودکار"}</span>
               </button>
-              <button className="flex justify-center items-center bg-gradient-to-tr from-gridient-end to-gridient-start rounded-md py-5 px-7">
-                <CursorArrowRippleIcon className="w-6 h-6 mr-1"></CursorArrowRippleIcon>
-                <span className="vazirmatn text-xl">عدد تصادفی</span>
+              <button onClick={randomNumber} className="flex justify-center items-center bg-gradient-to-tr from-gridient-end to-gridient-start rounded-md py-5 px-7">
+                <CursorArrowRippleIcon className="w-6 h-6 mr-1"/>
+                <span  className="vazirmatn text-xl">عدد تصادفی</span>
               </button>
             </div>
 
