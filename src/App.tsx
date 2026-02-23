@@ -12,6 +12,7 @@ const App: React.FC = () => {
   const [counter, setcounter] = useState<number>(5);
   const [isAuto, setIsAuto] = useState<boolean>(false);
   const [history, setHistory] = useState<number[]>([5]);
+  const [step, setStep] = useState<number>(1);
 
   const randomMutedColors = () => {
     const mutedColors = [
@@ -37,11 +38,11 @@ const App: React.FC = () => {
   });
 
   function increment(): void {
-    setcounter((prev) => Math.min(20, prev + 1));
+    setcounter((prev) => Math.min(20, prev + step));
   }
 
   function decrement(): void {
-    setcounter((prev) => Math.max(0, prev - 1));
+    setcounter((prev) => Math.max(0, prev - step));
   }
 
   function reset(): void {
@@ -64,19 +65,28 @@ const App: React.FC = () => {
           setIsAuto(false);
           return 20;
         }
-        return prev + 1;
+        return prev + step;
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [isAuto]);
+  }, [isAuto, step]);
 
   useEffect(() => {
     setHistory((prev) => [...prev, counter].slice(-5));
   }, [counter]);
 
+  // about steps
+  function increseSteps(): void {
+    setStep((prev) => Math.floor(Math.min(5, prev + 1)));
+  }
+
+  function decreaseSteps(): void {
+    setStep((prev) => Math.floor(Math.max(1, prev - 1)));
+  }
+
   return (
     <div className="min-h-screen flex justify-center items-center bg-background">
-      <div className="h-auto p-9 rounded-sm bg-card shadow-shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1)]">
+      <div className="h-auto p-6 rounded-sm bg-card shadow-shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1)]">
         <div>
           <p className="text-3xl text-center text-header-text vazirmatn mb-7">
             کانتر من
@@ -87,22 +97,59 @@ const App: React.FC = () => {
           <div className="items-center justify-center flex gap-10 mt-10">
             <button
               onClick={decrement}
-              className="rounded-full p-5 bg-first-button"
+              disabled={counter <= 0}
+              className={`rounded-full p-5 bg-first-button
+                ${counter <= 0 ? "opacity-50" : "opacity-100"}
+                `}
             >
               <MinusIcon className="w-10 h-10" />
             </button>
             <button
               onClick={reset}
-              className="bg-second-button rounded-full py-6 px-8"
+              disabled={counter === 5}
+              className={`bg-second-button rounded-full py-6 px-8
+                ${counter === 5 ? "opacity-50" : "opacity-100"}
+                `}
             >
               <ArrowPathIcon className="inline w-7 h-7" />
               <span className="vazirmatn text-xl ml-1.5">ریست</span>
             </button>
             <button
               onClick={increment}
-              className="bg-third-button rounded-full p-5"
+              disabled={counter >= 20}
+              className={`bg-third-button rounded-full p-5
+                ${counter >= 20 ? "opacity-50" : "opacity-100"}`}
             >
               <PlusIcon className="w-10 h-10" />
+            </button>
+          </div>
+
+          <div className="justify-center items-center mt-4 text-center">
+            <button
+              disabled={step <= 1}
+              onClick={decreaseSteps}
+              className={`p-3 rounded-full bg-background
+              ${
+                step <= 1
+                  ? "cursor-not-allowed opacity-50 text-grey"
+                  : "opacity-100"
+              }
+              `}
+            >
+              <MinusIcon className="w-5 h-5" />
+            </button>
+            <button className="mx-3"> گام: {step}</button>
+            <button
+              disabled={step >= 5}
+              onClick={increseSteps}
+              className={`p-3 rounded-full bg-background
+              ${
+                step >= 5
+                  ? "cursor-not-allowed text-grey opacity-50 "
+                  : "opacity-100"
+              }`}
+            >
+              <PlusIcon className="w-5 h-5" />
             </button>
           </div>
 
@@ -138,7 +185,7 @@ const App: React.FC = () => {
 
           <div className="text-center mt-8">
             <small className="vazirmatn text-small-tag">
-              محدوده: 0 تا 20 | گام: 2
+              محدوده: 0 تا 20 | گام: {step}
             </small>
           </div>
         </div>
