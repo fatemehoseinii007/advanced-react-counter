@@ -7,6 +7,7 @@ import {
   CursorArrowRippleIcon,
   StopIcon,
 } from "@heroicons/react/24/outline";
+import Button from "./components/button/button";
 
 const App: React.FC = () => {
   const [counter, setcounter] = useState<number>(5);
@@ -95,69 +96,47 @@ const App: React.FC = () => {
             {counter}
           </p>
           <div className="items-center justify-center flex gap-10 mt-10">
-            <button
-              onClick={decrement}
-              disabled={counter <= 0}
-              className={`rounded-full p-5 bg-first-button
-                ${counter <= 0 ? "opacity-50" : "opacity-100"}
-                `}
-            >
+            <Button onClick={decrement} disabled={counter <= 0} variant="first">
               <MinusIcon className="w-10 h-10" />
-            </button>
-            <button
-              onClick={reset}
-              disabled={counter === 5}
-              className={`bg-second-button rounded-full py-6 px-8
-                ${counter === 5 ? "opacity-50" : "opacity-100"}
-                `}
-            >
+            </Button>
+            <Button onClick={reset} disabled={counter === 5} variant="second">
               <ArrowPathIcon className="inline w-7 h-7" />
               <span className="vazirmatn text-xl ml-1.5">ریست</span>
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={increment}
               disabled={counter >= 20}
-              className={`bg-third-button rounded-full p-5
-                ${counter >= 20 ? "opacity-50" : "opacity-100"}`}
+              variant="third"
             >
               <PlusIcon className="w-10 h-10" />
-            </button>
+            </Button>
           </div>
 
           <div className="justify-center items-center mt-4 text-center">
-            <button
+            <Button
+              variant="background"
               disabled={step <= 1}
               onClick={decreaseSteps}
-              className={`p-3 rounded-full bg-background
-              ${
-                step <= 1
-                  ? "cursor-not-allowed opacity-50 text-grey"
-                  : "opacity-100"
-              }
+              className={`
+              ${step <= 1 ? "cursor-not-allowed" : ""}
               `}
             >
               <MinusIcon className="w-5 h-5" />
-            </button>
-            <button className="mx-3"> گام: {step}</button>
-            <button
+            </Button>
+            <span className="mx-3"> گام: {step}</span>
+            <Button
+              variant="background"
               disabled={step >= 5}
               onClick={increseSteps}
-              className={`p-3 rounded-full bg-background
-              ${
-                step >= 5
-                  ? "cursor-not-allowed text-grey opacity-50 "
-                  : "opacity-100"
-              }`}
+              className={`
+              ${step >= 5 ? "cursor-not-allowed" : ""}`}
             >
               <PlusIcon className="w-5 h-5" />
-            </button>
+            </Button>
           </div>
 
           <div className="flex justify-between items-center mt-16">
-            <button
-              onClick={toggleAuto}
-              className="bg-gradient-to-tr from-gridient-start to-gridient-end rounded-md p-5 flex justify-center items-center"
-            >
+            <Button onClick={toggleAuto} variant="gradient-forward">
               {!isAuto ? (
                 <PlayIcon className="w-6 h-6 mr-1" />
               ) : (
@@ -166,14 +145,11 @@ const App: React.FC = () => {
               <span className="vazirmatn text-xl">
                 {isAuto ? "توقف" : "شروع خودکار"}
               </span>
-            </button>
-            <button
-              onClick={randomNumber}
-              className="flex justify-center items-center bg-gradient-to-tr from-gridient-end to-gridient-start rounded-md py-5 px-7"
-            >
+            </Button>
+            <Button onClick={randomNumber} variant="gradient-reverse">
               <CursorArrowRippleIcon className="w-6 h-6 mr-1" />
               <span className="vazirmatn text-xl">عدد تصادفی</span>
-            </button>
+            </Button>
           </div>
 
           <div className="bg-secondry-background mt-8 rounded-md p-3">
