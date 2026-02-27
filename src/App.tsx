@@ -8,6 +8,7 @@ import {
   StopIcon,
 } from "@heroicons/react/24/outline";
 import Button from "./components/button/button";
+import StepControl from "./components/stepControl/stepControl";
 
 const App: React.FC = () => {
   const [counter, setcounter] = useState<number>(5);
@@ -77,7 +78,7 @@ const App: React.FC = () => {
   }, [counter]);
 
   // about steps
-  function increseSteps(): void {
+  function increaseSteps(): void {
     setStep((prev) => Math.floor(Math.min(5, prev + 1)));
   }
 
@@ -112,28 +113,11 @@ const App: React.FC = () => {
             </Button>
           </div>
 
-          <div className="justify-center items-center mt-4 text-center">
-            <Button
-              variant="background"
-              disabled={step <= 1}
-              onClick={decreaseSteps}
-              className={`
-              ${step <= 1 ? "cursor-not-allowed" : ""}
-              `}
-            >
-              <MinusIcon className="w-5 h-5" />
-            </Button>
-            <span className="mx-3"> گام: {step}</span>
-            <Button
-              variant="background"
-              disabled={step >= 5}
-              onClick={increseSteps}
-              className={`
-              ${step >= 5 ? "cursor-not-allowed" : ""}`}
-            >
-              <PlusIcon className="w-5 h-5" />
-            </Button>
-          </div>
+          <StepControl 
+          step={step}
+          increseSteps={increaseSteps}
+          decreaseSteps={decreaseSteps}
+          />
 
           <div className="flex justify-between items-center mt-16">
             <Button onClick={toggleAuto} variant="gradient-forward">
